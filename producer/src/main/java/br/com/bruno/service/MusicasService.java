@@ -21,7 +21,7 @@ public class MusicasService {
     }
 
     public List<MusicasDTO> findAll() {
-        final List<Musicas> musicass = musicasRepository.findAll(Sort.by("id"));
+        final List<Musicas> musicass = musicasRepository.findAll(Sort.by("artista"));
         return musicass.stream()
                 .map(musicas -> mapToDTO(musicas, new MusicasDTO()))
                 .toList();
@@ -33,17 +33,17 @@ public class MusicasService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public UUID create(final MusicasDTO musicasDTO) {
+    public Musicas create(final MusicasDTO musicasDTO) {
         final Musicas musicas = new Musicas();
         mapToEntity(musicasDTO, musicas);
-        return musicasRepository.save(musicas).getId();
+        return musicasRepository.save(musicas);
     }
 
-    public void update(final UUID id, final MusicasDTO musicasDTO) {
+    public Musicas update(final UUID id, final MusicasDTO musicasDTO) {
         final Musicas musicas = musicasRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
         mapToEntity(musicasDTO, musicas);
-        musicasRepository.save(musicas);
+        return musicasRepository.save(musicas);
     }
 
     public void delete(final UUID id) {

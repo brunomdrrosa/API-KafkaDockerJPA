@@ -3,6 +3,7 @@ package br.com.bruno.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class Musicas {
 
     @Id
+    @Type(type="uuid-char")
     @Column(nullable = false, updatable = false, columnDefinition = "char(36)")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "uuid")
