@@ -12,6 +12,11 @@ API com Kafka, Docker e JPA
 
 Esta é uma aplicação de exemplo que consiste em um producer e um consumer que se comunicam usando o Apache Kafka, além de uma API de músicas que utiliza o banco de dados em memória H2. Ela demonstra a troca de mensagens entre os dois componentes e fornece funcionalidade para gerenciar músicas.
 
+Para rodar o Kafka e Zookeeper, pode-se baixar a imagem do spotify/kafka no site do Docker Hub:
+```
+docker pull spotify/kafka
+```
+<br>
 
 | HTTP Verbs | Endpoints    | Ação                                          |
 | ---------- | ------------ | --------------------------------------------- |
