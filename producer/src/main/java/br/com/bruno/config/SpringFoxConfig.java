@@ -27,8 +27,9 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("MusicWave API")
-                .description("API for managing music information with Docker, JPA, and Kafka")
+                .title("API de Músicas")
+                .description("API desenvolvida como parte de um projeto de treinamento para aprimorar as minhas " +
+                        "habilidades em Docker, JPA, e Kafka")
                 .version("1.0.0")
                 .build();
     }
