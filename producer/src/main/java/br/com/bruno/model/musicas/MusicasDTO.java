@@ -1,13 +1,11 @@
-package br.com.bruno.model;
+package br.com.bruno.model.musicas;
 
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 public class MusicasDTO {
     private UUID id;
     @NotNull

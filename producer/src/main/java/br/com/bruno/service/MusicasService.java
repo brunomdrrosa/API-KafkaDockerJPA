@@ -1,9 +1,10 @@
 package br.com.bruno.service;
 
 import br.com.bruno.domain.Musicas;
-import br.com.bruno.model.MusicasDTO;
+import br.com.bruno.model.musicas.MusicasDTO;
 import br.com.bruno.repos.MusicasRepository;
 import br.com.bruno.util.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -12,36 +13,33 @@ import java.util.UUID;
 
 
 @Service
+@AllArgsConstructor
 public class MusicasService {
 
     private final MusicasRepository musicasRepository;
 
-    public MusicasService(final MusicasRepository musicasRepository) {
-        this.musicasRepository = musicasRepository;
-    }
-
-    public List<MusicasDTO> findAll() {
+    public List<MusicasDTO> buscarTodasMusicas() {
         final List<Musicas> musicass = musicasRepository.findAll(Sort.by("artista"));
         return musicass.stream()
                 .map(musicas -> mapToDTO(musicas, new MusicasDTO()))
                 .toList();
     }
 
-    public MusicasDTO get(final UUID id) {
+    public MusicasDTO buscarMusicaPorId(final UUID id) {
         return musicasRepository.findById(id)
                 .map(musicas -> mapToDTO(musicas, new MusicasDTO()))
-                .orElseThrow(NotFoundException::new);
+                .orElseThrow(() -> new NotFoundException("Música não encontrada para o ID: " + id));
     }
 
-    public Musicas create(final MusicasDTO musicasDTO) {
+    public Musicas salvarMusica(final MusicasDTO musicasDTO) {
         final Musicas musicas = new Musicas();
         mapToEntity(musicasDTO, musicas);
         return musicasRepository.save(musicas);
     }
 
-    public Musicas update(final UUID id, final MusicasDTO musicasDTO) {
+    public Musicas atualizarMusica(final UUID id, final MusicasDTO musicasDTO) {
         final Musicas musicas = musicasRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
+                .orElseThrow(() -> new NotFoundException("Música não encontrada para o ID: " + id));
         mapToEntity(musicasDTO, musicas);
         return musicasRepository.save(musicas);
     }
